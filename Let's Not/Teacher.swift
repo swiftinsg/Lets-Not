@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct Teacher: Codable, Identifiable, Equatable {
+    var id = UUID()
+    var name: String
+    var subject: String
+    var excuses: [Excuse] = []
+}
