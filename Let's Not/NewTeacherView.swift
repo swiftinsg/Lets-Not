@@ -28,16 +28,23 @@ struct NewTeacherView: View {
                 } header: {
                     Text("Subject")
                 }
-            }
-            .navigationTitle("New Teacher")
-            .toolbar {
-                Button {
-                    teacherManager.teachers.append(teacher)
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Image(systemName: "checkmark")
+                
+                Section {
+                    Button {
+                        teacherManager.teachers.append(teacher)
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Label("Done", systemImage: "checkmark")
+                    }
+                    
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
+                    }
                 }
             }
+            .navigationTitle("New Teacher")
         }
     }
 }

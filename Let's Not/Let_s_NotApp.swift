@@ -10,10 +10,28 @@ import SwiftUI
 @main
 struct Let_s_NotApp: App {
     
+    @StateObject var teacherManager = TeacherManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(teacherManager: .init(wrappedValue: teacherManager))
         }
+        
+        #if os(visionOS)
+        WindowGroup(for: Excuse.self) { $excuse in
+            if let excuse {
+                ExcuseDetailWindow(excuse: excuse, teacherManager: teacherManager)
+            }
+        }
+        .defaultSize(width: 512, height: 360)
+        
+        WindowGroup(for: Teacher.self) { $teacher in
+            if let teacher = teacher {
+                TeacherDetailWindow(teacherManager: teacherManager, teacher: teacher)
+            }
+        }
+        .defaultSize(width: 512, height: 360)
+        #endif
     }
 }
 

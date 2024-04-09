@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Excuse: Identifiable, Codable, Equatable {
+struct Excuse: Identifiable, Codable, Equatable, Hashable {
     var id: Int
     var title: String
     

@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var teacherManager = TeacherManager()
+    @ObservedObject var teacherManager: TeacherManager
     @ObservedObject var excuseManager = ExcuseManager()
     
-    init() {
+    init(teacherManager: ObservedObject<TeacherManager>) {
+        self._teacherManager = teacherManager
         UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont.preferredFont(forTextStyle: .largeTitle).rounded(weight: .bold)]
         UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.preferredFont(forTextStyle: .headline).rounded(weight: .semibold)]
         UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .caption2).rounded(weight: .medium)], for: [])
@@ -32,11 +33,5 @@ struct ContentView: View {
                         .font(.system(.headline, design: .rounded))
                 }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

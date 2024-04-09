@@ -22,6 +22,9 @@
 		325B8C19272E74AD007E9225 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325B8C18272E74AD007E9225 /* Assets.xcassets */; };
 		325B8C1C272E74AD007E9225 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325B8C1B272E74AD007E9225 /* Preview Assets.xcassets */; };
 		325B8C23272E7533007E9225 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325B8C22272E7533007E9225 /* ExploreView.swift */; };
+		32B3B5462BC4C16E00C066CE /* ExcuseCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B3B5452BC4C16E00C066CE /* ExcuseCardButton.swift */; };
+		32B3B5482BC4CAE400C066CE /* ExcuseDetailWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B3B5472BC4CAE400C066CE /* ExcuseDetailWindow.swift */; };
+		32B3B54A2BC4F0EC00C066CE /* TeacherDetailWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B3B5492BC4F0EC00C066CE /* TeacherDetailWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		325B8C18272E74AD007E9225 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		325B8C1B272E74AD007E9225 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		325B8C22272E7533007E9225 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		32B3B5452BC4C16E00C066CE /* ExcuseCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcuseCardButton.swift; sourceTree = "<group>"; };
+		32B3B5472BC4CAE400C066CE /* ExcuseDetailWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcuseDetailWindow.swift; sourceTree = "<group>"; };
+		32B3B5492BC4F0EC00C066CE /* TeacherDetailWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +82,15 @@
 				325B8C14272E74A8007E9225 /* Let_s_NotApp.swift */,
 				325B8C16272E74A8007E9225 /* ContentView.swift */,
 				325B8C22272E7533007E9225 /* ExploreView.swift */,
+				32B3B5452BC4C16E00C066CE /* ExcuseCardButton.swift */,
+				32B3B5472BC4CAE400C066CE /* ExcuseDetailWindow.swift */,
 				325A66A0272ECD30008C5A77 /* ExcuseDetailView.swift */,
 				325A66AC272F9A84008C5A77 /* TeacherSelectionView.swift */,
 				325A66A4272ED9D2008C5A77 /* MyExcusesView.swift */,
 				325A66AE272FA33F008C5A77 /* NewExcuseView.swift */,
 				325A66A2272ED963008C5A77 /* Teacher.swift */,
 				325A66A6272F73BC008C5A77 /* TeacherDetailView.swift */,
+				32B3B5492BC4F0EC00C066CE /* TeacherDetailWindow.swift */,
 				325A66AA272F8D20008C5A77 /* NewTeacherView.swift */,
 				325A669E272ECADA008C5A77 /* Excuse.swift */,
 				325A66A8272F886A008C5A77 /* TeacherManager.swift */,
@@ -170,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32B3B5462BC4C16E00C066CE /* ExcuseCardButton.swift in Sources */,
 				325A66AB272F8D20008C5A77 /* NewTeacherView.swift in Sources */,
 				325A66B1272FB09A008C5A77 /* ExcuseManager.swift in Sources */,
 				325A66A5272ED9D2008C5A77 /* MyExcusesView.swift in Sources */,
@@ -177,8 +187,10 @@
 				325A66AD272F9A84008C5A77 /* TeacherSelectionView.swift in Sources */,
 				325A66AF272FA33F008C5A77 /* NewExcuseView.swift in Sources */,
 				325A66A1272ECD30008C5A77 /* ExcuseDetailView.swift in Sources */,
+				32B3B5482BC4CAE400C066CE /* ExcuseDetailWindow.swift in Sources */,
 				325A669F272ECADA008C5A77 /* Excuse.swift in Sources */,
 				325A66A7272F73BC008C5A77 /* TeacherDetailView.swift in Sources */,
+				32B3B54A2BC4F0EC00C066CE /* TeacherDetailWindow.swift in Sources */,
 				325A66A9272F886A008C5A77 /* TeacherManager.swift in Sources */,
 				325B8C17272E74A8007E9225 /* ContentView.swift in Sources */,
 				325B8C23272E7533007E9225 /* ExploreView.swift in Sources */,
@@ -321,17 +333,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "sg.tk.Lets-Not";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,7";
 			};
 			name = Debug;
 		};
@@ -351,17 +366,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "sg.tk.Lets-Not";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,7";
 			};
 			name = Release;
 		};

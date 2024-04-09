@@ -9,120 +9,138 @@ import SwiftUI
 
 struct MyExcusesView: View {
     
-    @State var isExcusePresented = false
     @State var isTeacherPresented = false
     @State var isNewTeacherSheetPresented = false
     @State var isNewExcuseSheetPresented = false
     
-    @State var selectedExcuse: Excuse?
     @State var selectedTeacher: Teacher?
     
     @ObservedObject var teacherManager: TeacherManager
     @ObservedObject var excuseManager: ExcuseManager
     
+    @Environment(\.openWindow) var openWindow
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
-                List {
-                    HStack {
-                        Text("👤 By me")
-                            .font(.system(.headline, design: .rounded))
-                            .foregroundStyle(.primary)
-                        
-                        Spacer()
-                        
-                        Button {
-                            isNewExcuseSheetPresented = true
-                        } label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(.accentColor)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack {
+                            Text("👤 By Me")
+                                .font(.system(.headline, design: .rounded))
+                                .foregroundStyle(.primary)
+                            
+                            Spacer()
+                            
+                            Button {
+                                isNewExcuseSheetPresented = true
+                            } label: {
+                                Image(systemName: "plus")
+                                    .foregroundColor(.accentColor)
+                            }
                         }
-                    }
-                    .padding(.horizontal)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    VStack(alignment: .leading) {
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.horizontal, paddingConstant)
+                        
                         Text("Excuses created by you.")
                             .font(.system(.subheadline, design: .rounded))
                             .foregroundStyle(.secondary)
                             .padding(.top, 0.5)
-                            .padding(.horizontal)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(excuseManager.userExcuses) { excuse in
-                                    Button {
-                                        selectedExcuse = excuse
-                                        isExcusePresented = true
-                                    } label: {
-                                        let isUsed = !excuse.usedOn(teachers: teacherManager.teachers).isEmpty
-                                        
-                                        HStack(alignment: .bottom) {
-                                            VStack(alignment: .leading) {
-                                                Text(excuse.title)
-                                                    .font(.system(.title, design: .rounded))
-                                                    .fontWeight(.semibold)
-                                                    .lineLimit(3)
-                                                    .multilineTextAlignment(.leading)
-                                                    .foregroundColor(isUsed ? .white : Color(.label))
-                                                
-                                                Spacer()
+                            .padding(.horizontal, paddingConstant)
+                    
+                    }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(excuseManager.userExcuses) { excuse in
+                                ExcuseCardButton(teacherManager: teacherManager, excuse: excuse)
+                                    .frame(width: 300, height: 170, alignment: .leading)
+                                    .contextMenu {
+                                        Button(role: .destructive) {
+                                            let index = excuseManager.userExcuses.firstIndex(of: excuse)
+                                            
+                                            if let index {
+                                                _ = withAnimation {
+                                                    excuseManager.userExcuses.remove(at: index)
+                                                }
                                             }
                                             
-                                            Spacer()
-                                            
-                                            Image(systemName: isUsed ? "heart.fill" : "heart")
-                                                .foregroundColor(isUsed ? .white : .accentColor)
-                                                .font(.system(size: 25, design: .rounded))
+                                            for (teacherIndex, teacher) in teacherManager.teachers.enumerated() {
+                                                if let teacherExcuseIndex = teacher.excuses.firstIndex(of: excuse) {
+                                                    teacherManager.teachers[teacherIndex].excuses.remove(at: teacherExcuseIndex)
+                                                }
+                                            }
+                                        } label: {
+                                            Label("Delete", systemImage: "trash")
                                         }
-                                        .padding()
-                                        .frame(width: 300, height: 170, alignment: .leading)
-                                        .background(isUsed ? Color.accentColor : Color(.systemGray6).opacity(0.7))
-                                        .cornerRadius(15)
                                     }
-                                }
                             }
-                            .padding(.horizontal)
                         }
-                        
-                        Divider()
-                            .padding()
+                        .padding(.horizontal, paddingConstant)
                     }
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                    .listRowSeparator(.hidden)
                     
-                    HStack {
-                        Text("🧑‍🏫 Teachers")
-                            .font(.system(.headline, design: .rounded))
-                            .foregroundStyle(.primary)
-                        
-                        Spacer()
-                        
-                        Button {
-                            isNewTeacherSheetPresented = true
-                        } label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(.accentColor)
+                    Divider()
+                        .padding(.horizontal, paddingConstant)
+
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack {
+                            Text("🧑‍🏫 Teachers")
+                                .font(.system(.headline, design: .rounded))
+                                .foregroundStyle(.primary)
+                            
+                            Spacer()
+                            
+                            Button {
+                                isNewTeacherSheetPresented = true
+                            } label: {
+                                Image(systemName: "plus")
+                                    .foregroundColor(.accentColor)
+                            }
                         }
+                        .padding(.horizontal, paddingConstant)
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Text("Assign excuses to teachers to ensure you never repeat them. There's nothing worse than hearing \"You said that to me last week\" from your teacher.")
+                            .font(.system(.subheadline, design: .rounded))
+                            .padding(.horizontal, paddingConstant)
+                            .foregroundStyle(.secondary)
+                            .padding(.bottom)
                     }
-                    .padding(.horizontal)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Text("Assign excuses to teachers to ensure you never repeat them. There's nothing worse than hearing \"You said that to me last week\" from your teacher.")
-                        .font(.system(.subheadline, design: .rounded))
-                        .padding(.horizontal)
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
 
                     ForEach(teacherManager.teachers) { teacher in
+#if os(visionOS)
                         Button {
-                            // open teacher view
+                            openWindow(value: teacher)
+                        } label: {
+                            HStack(alignment: .bottom) {
+                                VStack(alignment: .leading) {
+                                    Text(teacher.name)
+                                        .fontWeight(.bold)
+                                        .multilineTextAlignment(.leading)
+                                        .font(.system(.title, design: .rounded))
+                                        .lineLimit(1)
+                                        .foregroundColor(Color(UIColor.label))
+                                    
+                                    Text(teacher.subject)
+                                        .font(.system(.headline, design: .rounded))
+                                        .foregroundColor(Color(UIColor.label))
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(teacher.excuses.count) excuses")
+                                        .font(.system(.caption, design: .rounded))
+                                }
+                                
+                                Spacer()
+                            }
+                            .frame(height: 110, alignment: .leading)
+                        }
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.roundedRectangle)
+                        .padding(.horizontal, paddingConstant)
+#else
+                        Button {
                             selectedTeacher = teacher
                             isTeacherPresented = true
                         } label: {
@@ -155,6 +173,7 @@ struct MyExcusesView: View {
                             .padding(.horizontal)
                         }
                         .buttonStyle(PlainButtonStyle())
+#endif
                     }
                     .onDelete { offsets in
                         teacherManager.teachers.remove(atOffsets: offsets)
@@ -169,14 +188,6 @@ struct MyExcusesView: View {
             }
             .frame(alignment: .leading)
             .navigationTitle("My Excuses")
-            .toolbar {
-                if !teacherManager.teachers.isEmpty {
-                    EditButton()
-                }
-            }
-            .sheet(isPresented: $isExcusePresented) {
-                ExcuseDetailView(excuse: $selectedExcuse, teacherManager: teacherManager)
-            }
             .sheet(isPresented: $isTeacherPresented) {
                 TeacherDetailView(teacherManager: teacherManager, teacher: $selectedTeacher)
             }
