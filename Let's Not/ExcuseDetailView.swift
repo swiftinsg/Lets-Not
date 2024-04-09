@@ -30,6 +30,7 @@ struct ExcuseDetailView: View {
                 .padding()
                 .background(Color.accentColor)
                 .cornerRadius(15)
+                .textSelection(.enabled)
                 .padding([.horizontal, .top])
                 
                 VStack(alignment: .leading) {
@@ -58,6 +59,7 @@ struct ExcuseDetailView: View {
                             .padding(.top, 0.5)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 ForEach(teacherManager.teachers) { teacher in
                     HStack {
